@@ -49,8 +49,6 @@
             </ul>
         </div>
     </nav>
-
-    <hr>
     <button class="btn btn-danger" ng-click="showCurrentUserInfo()">Обо мне</button>
     <hr>
 
@@ -102,7 +100,7 @@
                 <button class="btn btn-primary" ng-click="changeRate(s.id, -5)">-</button>
                 {{s.rate}}
                 <button class="btn btn-primary" ng-click="changeRate(s.id, 5)">+</button>
-                <button type="button" class="btn btn-success" ng-click="addToCart(s)">Add to cart</button>
+                <button type="button" class="btn btn-success" ng-click="addToCart(s.id)">Add to cart</button>
             </td>
             <td>
                 <button class="btn btn-danger" ng-click="deleteProduct(s.id)">Delete</button>
@@ -121,22 +119,26 @@
             <td>Action</td>
         </tr>
         <tbody>
-        <tr ng-repeat="p in CartList">
-            <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>{{p.cost}}</td>
+        <tr ng-repeat="item in Cart.items">
+            <td>{{item.productId}}</td>
+            <td>{{item.productTitle}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
             <td>
-                <button class="btn btn-primary" ng-click="changeRate(p.id, -5)">-</button>
-                {{p.rate}}
-                <button class="btn btn-primary" ng-click="changeRate(p.id, 5)">+</button>
+                <button class="btn btn-danger" ng-click="deleteProductFromCart(item.productId)">Delete</button>
             </td>
-            <td>
-                <button class="btn btn-danger" ng-click="deleteProductFromCart(s.id)">Delete</button>
-            </td>
+        <tr>
+            <td>Итого</td>
+            <td>{{Cart.totalPrice}}</td>
+        </tr>
+
         </tr>
         </tbody>
         <td>
             <button class="btn btn-danger" ng-click="clearCart()">Clear Cart</button>
+        </td>
+        <td>
+            <button class="btn btn-dark" ng-click="checkout()">Checkout</button>
         </td>
     </table>
 
@@ -153,24 +155,24 @@
 <!--    </form>-->
 
 
-    <!--    <form novalidate ng-submit="loadProducts()">-->
-    <!--        <div class="form-floating input-group-sm">-->
-    <!--            <label for="filterTitle">Product Title</label>-->
-    <!--            <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">-->
-    <!--        </div>-->
-    <!--        <p></p>-->
-    <!--        <div class="form-floating input-group-sm">-->
-    <!--            <label for="filterMinRate">Min Rate</label>-->
-    <!--            <input type="number" class="form-control" id="filterMinRate" placeholder="" ng-model="filter.min_rate">-->
-    <!--        </div>-->
-    <!--        <p></p>-->
-    <!--        <div class="form-floating input-group-sm">-->
-    <!--            <label for="filterMaxRate">Max Rate</label>-->
-    <!--            <input type="number" class="form-control" id="filterMaxRate" placeholder="" ng-model="filter.max_rate">-->
-    <!--        </div>-->
-    <!--        <p></p>-->
-    <!--        <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Accept</button>-->
-    <!--    </form>-->
+        <form novalidate ng-submit="loadProducts()">
+            <div class="form-floating input-group-sm">
+                <label for="filterTitle">Product Title</label>
+                <input type="text" class="form-control" id="filterTitle" placeholder="" ng-model="filter.title_part">
+            </div>
+            <p></p>
+            <div class="form-floating input-group-sm">
+                <label for="filterMinRate">Min Rate</label>
+                <input type="number" class="form-control" id="filterMinRate" placeholder="" ng-model="filter.min_rate">
+            </div>
+            <p></p>
+            <div class="form-floating input-group-sm">
+                <label for="filterMaxRate">Max Rate</label>
+                <input type="number" class="form-control" id="filterMaxRate" placeholder="" ng-model="filter.max_rate">
+            </div>
+            <p></p>
+            <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Accept</button>
+        </form>
 
 </div>
 </body>

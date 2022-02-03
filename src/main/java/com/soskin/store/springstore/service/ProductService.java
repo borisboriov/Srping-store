@@ -5,7 +5,7 @@ import com.soskin.store.springstore.dto.ProductDto;
 import com.soskin.store.springstore.entities.Product;
 import com.soskin.store.springstore.exceptions.ResourceNotFoundException;
 import com.soskin.store.springstore.repositories.ProductRepository;
-import com.soskin.store.springstore.specifications.ProductSpecifications;
+import com.soskin.store.springstore.repositories.specifications.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,7 +39,7 @@ public class ProductService {
         if (partTitle != null) {
             specification = specification.and(ProductSpecifications.titleLike(partTitle));
         }
-        return productRepository.findAll(specification, PageRequest.of(page - 1, 10));
+        return productRepository.findAll(specification, PageRequest.of(page - 1, 5));
     }
 
     public Optional<Product> findById(Long id) {
@@ -57,7 +57,7 @@ public class ProductService {
     @Transactional
     public Product update(ProductDto productDto) {
         Product product = productRepository.findById(productDto.getId()).orElseThrow(() -> new ResourceNotFoundException("Not update! Product not found " + productDto.getId()));
-        product.setCost(product.getCost());
+        product.setPrice(product.getPrice());
         product.setTitle(product.getTitle());
         product.setRate(productDto.getRate());
         return product;

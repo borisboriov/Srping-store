@@ -5,6 +5,50 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.springWebUser.token;
     }
 
+    //Cart methods --------------------------------------------
+    $scope.addToCart = function (productId) {
+        $http.get('http://localhost:8090/app/api/v1/carts/add/' + productId)
+            .then(function (response) {
+                $scope.loadCart();
+            });
+    }
+    $scope.loadCart = function () {
+        $http.get('http://localhost:8090/app/api/v1/carts')
+            .then(function (response) {
+                $scope.Cart = response.data;
+            });
+    }
+
+    $scope.clearCart = function () {
+        $http.get('http://localhost:8090/app/api/v1/carts/clear')
+            .then(function (response) {
+                $scope.loadCart();
+            });
+    }
+
+
+    $scope.deleteProductFromCart = function (productId) {
+        $http.delete(contextPath + '/carts/' + productId)
+            .then(function (response) {
+                $scope.Cart = response.data;
+                $scope.loadCart();
+
+            });
+    }
+
+    $scope.checkout = function () {
+        console.log($scope.Cart)
+
+        $http.post('http://localhost:8090/app/api/v1/orders/', $scope.Cart)
+            .then(function (response) {
+                console.log($scope.Cart)
+            });
+    }
+
+//Cart methods --------------------------------------------
+
+
+
     //Auth methods --------------------------------------------
 
     $scope.createNewUser = function () {
@@ -105,35 +149,6 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
         });
     }
 
-
-//Cart methods --------------------------------------------
-    $scope.addToCart = function (product) {
-        $http({
-            url: contextPath + '/carts/add/',
-            method: 'POST',
-            data: product
-        })
-            .then(function (response) {
-                $scope.CartList = response.data;
-            })
-    }
-
-    $scope.deleteProductFromCart = function (productId) {
-        $http.delete(contextPath + '/carts/' + productId)
-            .then(function (response) {
-                $scope.CartList = response.data;
-            });
-    }
-
-    $scope.clearCart = function () {
-        $http.delete(contextPath + '/carts')
-            .then(function (response) {
-                $scope.CartList = response.data;
-            });
-    }
-//Cart methods --------------------------------------------
-
-
     $scope.loadProducts();
-
+    $scope.loadCart();
 });

@@ -17,4 +17,7 @@ spring:
     console:
       enabled: true
       settings:
-        web-allow-others: false
+        web-allow-others: true
+
+
+      path: /console/

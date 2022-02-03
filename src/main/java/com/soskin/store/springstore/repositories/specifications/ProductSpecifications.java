@@ -1,4 +1,4 @@
-package com.soskin.store.springstore.specifications;
+package com.soskin.store.springstore.repositories.specifications;
 
 import com.soskin.store.springstore.entities.Product;
 import org.springframework.data.jpa.domain.Specification;

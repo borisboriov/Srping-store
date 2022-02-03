@@ -12,9 +12,9 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpecificationExecutor<Product> {
 
 
-    List<Product> findAllByCostBetween(Integer min, Integer max);
+    List<Product> findAllByPriceBetween(Integer min, Integer max);
 
-    List<Product> findAllByCostGreaterThan(Integer min);
+    List<Product> findAllByPriceGreaterThan(Integer min);
 
-    List<Product> findAllByCostIsLessThan(Integer max);
+    List<Product> findAllByPriceIsLessThan(Integer max);
 }
