@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -18,7 +17,6 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserService userService;
     private final CartService cartService;
-
 
     @Transactional
     public void saveNewOrder(String name, Order order) {
@@ -29,9 +27,6 @@ public class OrderService {
         log.error("---------ORDER BEFORE SAVE   " + order);
         orderRepository.save(order);
         cartService.clear();
-        log.error("---------ORDER afeter  SAVE  and clear  " + order);
-
-
+        log.error("---------ORDER after  SAVE  and clear  " + order);
     }
-
 }

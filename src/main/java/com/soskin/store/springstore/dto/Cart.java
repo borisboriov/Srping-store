@@ -2,12 +2,14 @@ package com.soskin.store.springstore.dto;
 
 import com.soskin.store.springstore.entities.Product;
 import lombok.Data;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Data
+@Component
 public class Cart {
     private List<OrderItemDto> items;
     private int totalPrice;

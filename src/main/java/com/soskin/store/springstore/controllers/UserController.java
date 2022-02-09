@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-    UserConverter userConverter;
+    private final UserConverter userConverter;
 
     @PostMapping
     public UserDto saveNewUser(@RequestBody UserDto userDto) {

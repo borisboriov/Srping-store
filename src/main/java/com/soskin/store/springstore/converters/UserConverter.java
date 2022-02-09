@@ -17,7 +17,7 @@ public class UserConverter {
 
     public User dtoToEntity(UserDto userDto) {
         String hashedPassword = passwordEncoder.encode(userDto.getPassword());
-        User user = new User(userDto.getId(), userDto.getUsername(), hashedPassword,  userDto.getEmail(), LocalDateTime.now(), LocalDateTime.now());
+        User user = new User(userDto.getId(), userDto.getUsername(), hashedPassword, userDto.getEmail(), LocalDateTime.now(), LocalDateTime.now());
         log.error("???____________________????" + user);
         return user;
     }

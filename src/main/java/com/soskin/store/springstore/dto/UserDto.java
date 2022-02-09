@@ -26,4 +26,6 @@ public class UserDto {
         password = user.getPassword();
         email = user.getEmail();
     }
+
+
 }

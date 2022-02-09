@@ -2,7 +2,7 @@ create table products
 (
     id    bigserial primary key,
     title varchar(255),
-    price  int,
+    price int,
     rate  int
 );
 
@@ -31,7 +31,8 @@ create table users
     password   varchar(80) not null,
     email      varchar(50) unique,
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp
+    updated_at timestamp default current_timestamp,
+    order_id   bigserial
 );
 
 create table roles
@@ -62,20 +63,23 @@ values (1, 1),
        (2, 2);
 
 
-create table orders (
-        id              bigserial primary key,
-        user_id         bigint not null references users (id),
-        total_price     int not null,
-        address         varchar(255),
-        phone           varchar(255)
+create table orders
+(
+    id          bigserial primary key,
+    user_id     bigint not null references users (id),
+--         product_id      bigint not null references products (id),
+    total_price int    not null,
+    address     varchar(255),
+    phone       varchar(255)
+--         order_id        bigserial
 );
 
-create table order_items (
-        id                      bigserial primary key,
-        product_id              bigint not null references products (id),
-        user_id                 bigint not null references users (id),
-        order_id                bigint not null references orders (id),
-        quantity                int not null,
-        price_per_product       int not null,
-        price                   int not null
+create table order_items
+(
+    id                bigserial primary key,
+    product_id        bigint not null references products (id),
+    order_id          bigint not null references orders (id),
+    quantity          int    not null,
+    price_per_product int    not null,
+    price             int    not null
 );

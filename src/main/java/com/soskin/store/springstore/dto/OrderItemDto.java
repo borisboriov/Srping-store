@@ -1,6 +1,7 @@
 package com.soskin.store.springstore.dto;
 
 import com.soskin.store.springstore.entities.Product;
+import com.soskin.store.springstore.entities.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,8 +22,10 @@ public class OrderItemDto {
         this.price = product.getPrice();
     }
 
+
     public void changeQuantity(int delta) {
         this.quantity += delta;
         this.price = this.quantity * this.pricePerProduct;
     }
+
 }

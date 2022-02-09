@@ -26,7 +26,6 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
             });
     }
 
-
     $scope.deleteProductFromCart = function (productId) {
         $http.delete(contextPath + '/carts/' + productId)
             .then(function (response) {
@@ -38,18 +37,21 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
 
     $scope.checkout = function () {
         console.log($scope.Cart)
-
-        $http.post('http://localhost:8090/app/api/v1/orders/', $scope.Cart)
-            .then(function (response) {
-                console.log($scope.Cart)
-            });
+        console.log($localStorage.springWebUser.username)
+        console.log($scope.order)
+        if (!$scope.isUserLoggedIn()) {
+            alert("Have to be authorized")
+        } else
+            $http.post('http://localhost:8090/app/api/v1/orders/', $scope.order)
+                .then(function (response) {
+                    $scope.clearCart()
+                });
     }
-
 //Cart methods --------------------------------------------
 
 
 
-    //Auth methods --------------------------------------------
+//Auth methods --------------------------------------------
 
     $scope.createNewUser = function () {
         console.log($scope.newUser);
