@@ -1,43 +1,42 @@
 package com.soskin.store.springstore.controllers;
 
+
 import com.soskin.store.springstore.converters.ProductConverter;
 import com.soskin.store.springstore.dto.ProductDto;
 import com.soskin.store.springstore.entities.Product;
 import com.soskin.store.springstore.exceptions.ResourceNotFoundException;
-import com.soskin.store.springstore.service.ProductService;
+import com.soskin.store.springstore.services.ProductsService;
 import com.soskin.store.springstore.validators.ProductValidator;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-
-@Slf4j
 @RestController
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
-public class ProductController {
-
-    private final ProductService productService;
+public class ProductsController {
+    private final ProductsService productsService;
     private final ProductConverter productConverter;
     private final ProductValidator productValidator;
 
-    @GetMapping()
-    public Page<ProductDto> findAllProducts(
+    @GetMapping
+    public Page<ProductDto> getAllProducts(
             @RequestParam(name = "p", defaultValue = "1") Integer page,
-            @RequestParam(name = "min_rate", required = false) Integer minRate,
-            @RequestParam(name = "max_rate", required = false) Integer maxRate,
+            @RequestParam(name = "min_price", required = false) Integer minPrice,
+            @RequestParam(name = "max_price", required = false) Integer maxPrice,
             @RequestParam(name = "title_part", required = false) String titlePart
     ) {
         if (page < 1) {
             page = 1;
         }
-        return productService.findAll(minRate, maxRate, titlePart, page).map(p -> productConverter.entityToDto(p));
+        return productsService.findAll(minPrice, maxPrice, titlePart, page).map(
+                p -> productConverter.entityToDto(p)
+        );
     }
 
     @GetMapping("/{id}")
-    public ProductDto findProductById(@PathVariable Long id) {
-        Product product = productService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found id# " + id));
+    public ProductDto getProductById(@PathVariable Long id) {
+        Product product = productsService.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found, id: " + id));
         return productConverter.entityToDto(product);
     }
 
@@ -45,28 +44,19 @@ public class ProductController {
     public ProductDto saveNewProduct(@RequestBody ProductDto productDto) {
         productValidator.validate(productDto);
         Product product = productConverter.dtoToEntity(productDto);
-        product = productService.save(product); //у него product = ...save(product);???
+        product = productsService.save(product);
         return productConverter.entityToDto(product);
     }
 
     @PutMapping
     public ProductDto updateProduct(@RequestBody ProductDto productDto) {
         productValidator.validate(productDto);
-        Product product = productService.update(productDto);
+        Product product = productsService.update(productDto);
         return productConverter.entityToDto(product);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteByID(@PathVariable Long id) {
-        productService.deleteByID(id);
+    public void deleteById(@PathVariable Long id) {
+        productsService.deleteById(id);
     }
-
-
-    @GetMapping("/change_rate")
-    public void changeRate(@RequestParam(name = "id") Long productId, @RequestParam(name = "delta") Integer delta) {
-        productService.changeRate(productId, delta);
-    }
-
-
-
 }

@@ -1,18 +1,16 @@
 package com.soskin.store.springstore.exceptions;
 
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Data
 @NoArgsConstructor
-public class FieldsValidatorError {
-
+@Data
+public class FieldsValidationError {
     private List<String> errorFieldsMessages;
 
-    public FieldsValidatorError(List<String> errorFieldsMessages) {
+    public FieldsValidationError(List<String> errorFieldsMessages) {
         this.errorFieldsMessages = errorFieldsMessages;
     }
 }

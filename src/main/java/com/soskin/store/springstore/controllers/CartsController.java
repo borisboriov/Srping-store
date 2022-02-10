@@ -1,17 +1,18 @@
 package com.soskin.store.springstore.controllers;
 
+
 import com.soskin.store.springstore.dto.Cart;
-import com.soskin.store.springstore.service.CartService;
+import com.soskin.store.springstore.services.CartService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RestController
-@RequestMapping("/api/v1/carts")
+@RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
-public class CartController {
-
+public class CartsController {
     private final CartService cartService;
 
     @GetMapping
@@ -27,11 +28,5 @@ public class CartController {
     @GetMapping("/clear")
     public void clearCart() {
         cartService.getCurrentCart().clear();
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteByID(@PathVariable Long id) {
-        log.error("----------------" + id);
-        cartService.deleteByID(id);
     }
 }

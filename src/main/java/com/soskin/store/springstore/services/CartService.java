@@ -1,4 +1,4 @@
-package com.soskin.store.springstore.service;
+package com.soskin.store.springstore.services;
 
 
 import com.soskin.store.springstore.dto.Cart;
@@ -7,14 +7,12 @@ import com.soskin.store.springstore.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
 import javax.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
-
-    private final ProductService productsService;
+    private final ProductsService productsService;
     private Cart cart;
 
     @PostConstruct
@@ -35,9 +33,5 @@ public class CartService {
 
     public void clear() {
         getCurrentCart().clear();
-    }
-
-    public void deleteByID(Long id) {
-        getCurrentCart().removeProduct(id);
     }
 }

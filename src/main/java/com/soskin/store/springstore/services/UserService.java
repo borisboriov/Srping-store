@@ -1,4 +1,5 @@
-package com.soskin.store.springstore.service;
+package com.soskin.store.springstore.services;
+
 
 import com.soskin.store.springstore.entities.Role;
 import com.soskin.store.springstore.entities.User;
@@ -11,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import java.util.Collection;
 import java.util.Optional;
@@ -35,9 +35,5 @@ public class UserService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-    }
-
-    public User save(User user) {
-        return userRepository.save(user);
     }
 }

@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8189
   servlet:
     context-path: /app
 spring:
@@ -17,7 +17,7 @@ spring:
     console:
       enabled: true
       settings:
-        web-allow-others: true
+        web-allow-others: false
 
 
       path: /console/

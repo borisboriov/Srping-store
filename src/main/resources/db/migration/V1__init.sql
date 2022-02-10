@@ -1,28 +1,16 @@
 create table products
 (
-    id    bigserial primary key,
-    title varchar(255),
-    price int,
-    rate  int
+    id         bigserial primary key,
+    title      varchar(255),
+    price      int,
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp
 );
 
-insert into products (title, price, rate)
-values ('Milk', 100, 5),
-       ('Bread', 90, 10),
-       ('Sugar', 80, 15),
-       ('Meat', 70, 20),
-       ('Fresh', 60, 30),
-       ('Salt', 50, 40),
-       ('Butter', 40, 1),
-       ('Salmon', 30, 2),
-       ('Tuna', 20, 3),
-       ('Pepper', 10, 4),
-       ('Salad', 200, 44),
-       ('Bree', 300, 34),
-       ('Cheese', 400, 90),
-       ('Vine', 500, 77),
-       ('Beer', 177, 24);
-
+insert into products (title, price)
+values ('Milk', 100),
+       ('Bread', 80),
+       ('Cheese', 90);
 
 create table users
 (
@@ -31,8 +19,7 @@ create table users
     password   varchar(80) not null,
     email      varchar(50) unique,
     created_at timestamp default current_timestamp,
-    updated_at timestamp default current_timestamp,
-    order_id   bigserial
+    updated_at timestamp default current_timestamp
 );
 
 create table roles
@@ -43,10 +30,12 @@ create table roles
     updated_at timestamp default current_timestamp
 );
 
-CREATE TABLE users_roles
+create table users_roles
 (
-    user_id bigint not null references users (id),
-    role_id bigint not null references roles (id),
+    user_id    bigint not null references users (id),
+    role_id    bigint not null references roles (id),
+    created_at timestamp default current_timestamp,
+    updated_at timestamp default current_timestamp,
     primary key (user_id, role_id)
 );
 
@@ -62,16 +51,15 @@ insert into users_roles (user_id, role_id)
 values (1, 1),
        (2, 2);
 
-
 create table orders
 (
     id          bigserial primary key,
     user_id     bigint not null references users (id),
---         product_id      bigint not null references products (id),
     total_price int    not null,
     address     varchar(255),
-    phone       varchar(255)
---         order_id        bigserial
+    phone       varchar(255),
+    created_at  timestamp default current_timestamp,
+    updated_at  timestamp default current_timestamp
 );
 
 create table order_items
@@ -81,5 +69,22 @@ create table order_items
     order_id          bigint not null references orders (id),
     quantity          int    not null,
     price_per_product int    not null,
-    price             int    not null
+    price             int    not null,
+    created_at        timestamp default current_timestamp,
+    updated_at        timestamp default current_timestamp
 );
+
+insert into orders (user_id, total_price, address, phone)
+values (1, 200, 'address', '12345');
+
+insert into order_items (product_id, order_id, quantity, price_per_product, price)
+values (1, 1, 2, 100, 200);
+
+
+
+
+
+
+
+
+

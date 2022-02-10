@@ -1,19 +1,18 @@
 package com.soskin.store.springstore.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Product {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,17 +22,19 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private int price;
+    private Integer price;
 
-    @Column(name = "rate")
-    private int rate;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    @ManyToMany
-    @JoinTable(name = "orders",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private Collection<Product> products;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 
-    public Product(Long id, String title, int cost, int rate) {
+    public Product(Long id, String title, Integer price) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
     }
 }

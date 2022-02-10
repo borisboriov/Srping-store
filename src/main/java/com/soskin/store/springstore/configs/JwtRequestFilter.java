@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
-    //    private final UserDetailsService userDetailsService;
+//    private final UserDetailsService userDetailsService;
     private final JwtTokenUtil jwtTokenUtil;
 
     @Override
@@ -45,8 +45,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 //            token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 //            SecurityContextHolder.getContext().setAuthentication(token);
 
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, null,
-                    jwtTokenUtil.getRoles(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, null, jwtTokenUtil.getRoles(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             SecurityContextHolder.getContext().setAuthentication(token);
         }
 
