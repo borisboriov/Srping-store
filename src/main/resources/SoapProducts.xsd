@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema
+        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+        xmlns:tns="http://www.soskin.com/store/springstore/SoapProducts"
+        targetNamespace="http://www.soskin.com/store/springstore/SoapProducts" elementFormDefault="qualified">
+
+    <xs:element name="GetSoapProductByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetAllSoapProductsRequest">
+        <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="GetSoapProductByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SoapProduct" type="tns:SoapProduct"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="GetAllSoapProductsResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SoapProduct" maxOccurs="unbounded" type="tns:SoapProduct"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="SoapProduct">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="title" type="xs:string"/>
+            <xs:element name="price" type="xs:int"/>
+<!--            <xs:element name="groupTitle" type="xs:string"/>-->
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
