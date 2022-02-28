@@ -1,6 +1,6 @@
 package com.soskin.store.springstore.core.controllers;
 
-import com.soskin.store.springstore.core.dto.ProfileDto;
+import com.soskin.store.springstore.api.core.ProfileDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;

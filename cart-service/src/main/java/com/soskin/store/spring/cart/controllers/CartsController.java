@@ -1,10 +1,12 @@
-package com.soskin.store.springstore.core.controllers;
+package com.soskin.store.spring.cart.controllers;
 
 
+import com.soskin.store.spring.cart.converters.CartConverter;
+import com.soskin.store.spring.cart.services.CartService;
+import com.soskin.store.springstore.api.carts.CartDto;
+import com.soskin.store.springstore.api.core.ProductDto;
 import com.soskin.store.springstore.api.dto.StringResponse;
-import com.soskin.store.springstore.core.dto.Cart;
-import com.soskin.store.springstore.core.services.CartService;
-import com.soskin.store.springstore.core.services.ProductsService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,14 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/cart")
 @RequiredArgsConstructor
-//@CrossOrigin("*")
 public class CartsController {
     private final CartService cartService;
-    private final ProductsService productsService;
+    private final CartConverter cartConverter;
 
     @GetMapping("/{uuid}")
-    public Cart getCart(@RequestHeader(required = false) String username, @PathVariable String uuid) {
-        return cartService.getCurrentCart(getCurrentCartUuid(username, uuid));
+    public CartDto getCart(@RequestHeader(required = false) String username, @PathVariable String uuid) {
+        return cartConverter.modelToDto(cartService.getCurrentCart(getCurrentCartUuid(username, uuid)));
     }
 
     @GetMapping("/generate")

@@ -1,7 +1,7 @@
 package com.soskin.store.springstore.core.converters;
 
 
-import com.soskin.store.springstore.core.dto.OrderDto;
+import com.soskin.store.springstore.api.core.OrderDto;
 import com.soskin.store.springstore.core.entities.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

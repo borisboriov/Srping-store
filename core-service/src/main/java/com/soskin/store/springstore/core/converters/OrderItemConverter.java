@@ -1,7 +1,7 @@
 package com.soskin.store.springstore.core.converters;
 
 
-import com.soskin.store.springstore.core.dto.OrderItemDto;
+import com.soskin.store.springstore.api.core.OrderItemDto;
 import com.soskin.store.springstore.core.entities.OrderItem;
 import org.springframework.stereotype.Component;
 

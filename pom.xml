@@ -11,6 +11,7 @@
         <module>front-service</module>
         <module>auth-service</module>
         <module>api</module>
+
     </modules>
 
     <parent>
@@ -43,16 +44,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!--        Redis-->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>redis.clients</groupId>
-            <artifactId>jedis</artifactId>
-            <version>3.6.0</version>
-        </dependency>
+
 
         <!--        other-->
         <dependency>

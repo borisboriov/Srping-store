@@ -2,7 +2,7 @@ package com.soskin.store.springstore.core.services;
 
 
 import com.soskin.store.springstore.api.exceptions.ResourceNotFoundException;
-import com.soskin.store.springstore.core.dto.ProductDto;
+import com.soskin.store.springstore.api.core.ProductDto;
 import com.soskin.store.springstore.core.entities.Product;
 import com.soskin.store.springstore.core.repositories.ProductsRepository;
 import com.soskin.store.springstore.core.repositories.specifications.ProductsSpecifications;

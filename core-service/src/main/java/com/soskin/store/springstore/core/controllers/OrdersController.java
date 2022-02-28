@@ -1,8 +1,8 @@
 package com.soskin.store.springstore.core.controllers;
 
 
-import com.soskin.store.springstore.core.dto.OrderDetailsDto;
-import com.soskin.store.springstore.core.dto.OrderDto;
+import com.soskin.store.springstore.api.core.OrderDetailsDto;
+import com.soskin.store.springstore.api.core.OrderDto;
 import com.soskin.store.springstore.core.converters.OrderConverter;
 import com.soskin.store.springstore.core.services.OrderService;
 import lombok.RequiredArgsConstructor;

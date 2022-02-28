@@ -1,7 +1,7 @@
 package com.soskin.store.springstore.core.validators;
 
 
-import com.soskin.store.springstore.core.dto.ProductDto;
+import com.soskin.store.springstore.api.core.ProductDto;
 import com.soskin.store.springstore.core.exceptions.ValidationException;
 import org.springframework.stereotype.Component;
 

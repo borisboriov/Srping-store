@@ -1,9 +1,10 @@
-package com.soskin.store.springstore.core.services;
+package com.soskin.store.spring.cart.services;
 
 
+import com.soskin.store.spring.cart.integrations.ProductsServiceIntegration;
+import com.soskin.store.spring.cart.models.Cart;
+import com.soskin.store.springstore.api.core.ProductDto;
 import com.soskin.store.springstore.api.exceptions.ResourceNotFoundException;
-import com.soskin.store.springstore.core.dto.Cart;
-import com.soskin.store.springstore.core.entities.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -15,7 +16,7 @@ import java.util.function.Consumer;
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private final ProductsService productsService;
+    private final ProductsServiceIntegration productsServiceIntegration;
     private final RedisTemplate<String, Object> redisTemplate;
 
     @Value("${utils.cart.prefix}")
@@ -37,9 +38,9 @@ public class CartService {
     }
 
     public void addToCart(String cartKey, Long productId) {
-        Product product = productsService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
+        ProductDto productDto = productsServiceIntegration.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Невозможно добавить продукт в корзину. Продукт не найдет, id: " + productId));
         execute(cartKey, c -> {
-            c.add(product);
+            c.add(productDto);
         });
     }
 
