@@ -11,6 +11,7 @@
         <module>front-service</module>
         <module>auth-service</module>
         <module>api</module>
+        <module>recomendations-service</module>
 
     </modules>
 

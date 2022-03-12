@@ -2,14 +2,10 @@ package com.soskin.store.springstore.core.integrations;
 
 
 import com.soskin.store.springstore.api.carts.CartDto;
-import com.soskin.store.springstore.api.core.ProductDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor

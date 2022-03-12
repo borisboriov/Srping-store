@@ -31,5 +31,18 @@ angular.module('market-front').controller('storeController', function ($scope, $
             });
     }
 
+
+
+    $scope.loadRecommendations = function () {
+        console.log("SSSSSS")
+        $http.get('http://localhost:8181/web-market-recommendations/api/v1/recommendations')
+            .then(function (response){
+            $scope.Recommendations = response.data;
+                console.log("SSSSSS")
+                console.log($scope.Recommendations)
+        });
+    };
+
+    $scope.loadRecommendations();
     $scope.loadProducts();
 });

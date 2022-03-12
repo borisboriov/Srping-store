@@ -24,6 +24,25 @@
                 <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Применить</button>
             </form>
         </div>
+        <div class="row g-2">
+            <div class="col-6 col-md-2">
+
+                <p></p>
+                <H3>Рекомендации топ 5 за сегодня</H3>
+                <table class="table table-hover">
+                    <tr>
+                        <td>Куплено сегодня штук</td>
+                    </tr>
+                    <tbody>
+                    <tr ng-repeat="r in Recommendations">
+                        <td>{{r.id}}</td>
+                        <td>{{r.productTitle}}</td>
+                        <td>{{r.quantity}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                    </div>
+            </div>
         <div class="col-sm-6 col-md-10">
             <table class="table table-hover">
                 <tr>

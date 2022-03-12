@@ -1,0 +1,8 @@
+server:
+  port: 8181
+  servlet:
+    context-path: /web-market-recommendations
+
+integrations:
+  core-service:
+    url: http://localhost:5555/core
