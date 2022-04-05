@@ -6,7 +6,7 @@ import com.soskin.store.springstore.api.exceptions.ResourceNotFoundException;
 import com.soskin.store.springstore.api.core.OrderDetailsDto;
 import com.soskin.store.springstore.core.entities.OrderItem;
 
-import com.soskin.store.springstore.core.integrations.CartsServiceIntegration;
+import com.soskin.store.springstore.core.integrations.CartServiceIntegration;
 import com.soskin.store.springstore.core.repositories.OrdersRepository;
 import com.soskin.store.springstore.core.entities.Order;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +20,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrdersRepository ordersRepository;
-    private final CartsServiceIntegration cartsServiceIntegration;
+    private final CartServiceIntegration cartServiceIntegration;
     private final ProductsService productsService;
 
     @Transactional
     public void createOrder(String username, OrderDetailsDto orderDetailsDto) {
-        CartDto currentCart = cartsServiceIntegration.getUserCart(username);
+        CartDto currentCart = cartServiceIntegration.getUserCart(username);
         Order order = new Order();
         order.setAddress(orderDetailsDto.getAddress());
         order.setPhone(orderDetailsDto.getPhone());
@@ -43,7 +43,7 @@ public class OrderService {
                 }).collect(Collectors.toList());
         order.setItems(items);
         ordersRepository.save(order);
-        cartsServiceIntegration.clearUserCart(username);
+        cartServiceIntegration.clearUserCart(username);
     }
 
     public List<Order> findOrdersByUsername(String username) {
