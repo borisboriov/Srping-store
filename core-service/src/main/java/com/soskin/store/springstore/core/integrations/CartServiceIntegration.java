@@ -34,12 +34,12 @@ public class CartServiceIntegration {
                         clientResponse -> clientResponse.bodyToMono(CartServiceAppError.class).map(
                                 body -> {
                                     if (body.getCode().equals(CartServiceAppError.CartServiceErrors.CART_NOT_FOUND.name())) {
-                                        return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина не найдена");
+                                        return new CartServiceIntegrationException("An incorrect request was made to the shopping cart service: the shopping cart was not found");
                                     }
                                     if (body.getCode().equals(CartServiceAppError.CartServiceErrors.CART_IS_BROKEN.name())) {
-                                        return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: корзина сломана");
+                                        return new CartServiceIntegrationException("An incorrect request was made to the basket service: the basket is broken");
                                     }
-                                    return new CartServiceIntegrationException("Выполнен некорректный запрос к сервису корзин: причина неизвестна");
+                                    return new CartServiceIntegrationException("An incorrect request was made to the shopping cart service: the reason is unknown");
                                 }
                         )
                 )
