@@ -4,6 +4,7 @@ package com.soskin.store.springstore.core.controllers;
 import com.soskin.store.springstore.api.core.OrderDetailsDto;
 import com.soskin.store.springstore.api.core.OrderDto;
 import com.soskin.store.springstore.api.core.ProductDto;
+import com.soskin.store.springstore.api.exceptions.ResourceNotFoundException;
 import com.soskin.store.springstore.core.converters.OrderConverter;
 import com.soskin.store.springstore.core.services.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -58,5 +59,22 @@ public class OrdersController {
     public List<OrderDto> getCurrentUserOrders(@RequestHeader @Parameter(description = "Username", required = true) String username) {
         return orderService.findOrdersByUsername(username).stream()
                 .map(orderConverter::entityToDto).collect(Collectors.toList());
+    }
+
+
+    @Operation(
+            summary = "Request to get a significant order by id ",
+            responses = {
+                    @ApiResponse(
+                            description = "Success response", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = OrderDto.class))
+
+                    ),
+
+            }
+    )
+    @GetMapping("/{id}")
+    public OrderDto getOrderById(@PathVariable Long id) {
+        return orderConverter.entityToDto(orderService.findById(id).orElseThrow(() -> new ResourceNotFoundException("ORDER 404")));
     }
 }
