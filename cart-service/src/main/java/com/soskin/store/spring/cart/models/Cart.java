@@ -1,8 +1,10 @@
 package com.soskin.store.spring.cart.models;
 
+
 import com.soskin.store.springstore.api.core.ProductDto;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @Data
 public class Cart {
     private List<CartItem> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
@@ -57,13 +59,13 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
     }
 
     private void recalculate() {
-        totalPrice = 0;
+        totalPrice = BigDecimal.ZERO;
         for (CartItem o : items) {
-            totalPrice += o.getPrice();
+            totalPrice = totalPrice.add(o.getPrice());
         }
     }
 
