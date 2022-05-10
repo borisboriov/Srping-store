@@ -5,22 +5,37 @@ server:
 utils:
   cart:
     prefix: SPRING_WEB_
+
+#  //тут поменяны драйверы и урл с указанием деф названием  схемы Public для флайвей //Todo
 spring:
   datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
-    username: sa
-    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/PUBLIC
+
+    username: root
+    password: admin
   jpa:
+    hibernate:
+      #      dialect: org.hibernate.dialect.MySQLDialect
+      ddl-auto: update
+
     show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
-  h2:
-    console:
-      enabled: true
-      settings:
-        web-allow-others: false
+#spring:
+#  datasource:
+#    driver-class-name: org.h2.Driver
+#    url: jdbc:h2:mem:mydatabase;MODE=PostgreSQL
+#    username: sa
+#    password:
+#  jpa:
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.H2Dialect
+#  h2:
+#    console:
+#      enabled: true
+#      settings:
+#        web-allow-others: false
 integrations:
   cart-service:
     url: http://localhost:5555/cart

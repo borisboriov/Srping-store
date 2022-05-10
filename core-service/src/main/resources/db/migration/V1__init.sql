@@ -1,6 +1,6 @@
 create table products
 (
-    id         bigserial primary key,
+    id         bigint primary key AUTO_INCREMENT,
     title      varchar(255),
     price      numeric(8, 2) not null,
     created_at timestamp default current_timestamp,
@@ -22,7 +22,7 @@ values ('Milk', 100.20),
 
 create table orders
 (
-    id          bigserial primary key,
+    id          bigint primary key AUTO_INCREMENT,
     username    varchar(255)  not null,
     total_price numeric(8, 2)  not null,
     address     varchar(255),
@@ -33,7 +33,7 @@ create table orders
 
 create table order_items
 (
-    id                bigserial primary key,
+    id                bigint primary key AUTO_INCREMENT,
     product_id        bigint not null references products (id),
     order_id          bigint not null references orders (id),
     quantity          int    not null,
